@@ -40,6 +40,11 @@ namespace Grafikanwendung {
 	private: System::Windows::Forms::Button^  button_RechteckZeichnen;
 	private: System::Windows::Forms::ColorDialog^  colorDialog1;
 	private: System::Windows::Forms::Button^  button_FarbeWaehlen;
+	private: System::Windows::Forms::Timer^  timer1;
+	private: System::Windows::Forms::TrackBar^  trackBar_Speed;
+	private: System::Windows::Forms::Label^  label_punktx;
+	private: System::Windows::Forms::Label^  label_punkty;
+	private: System::ComponentModel::IContainer^  components;
 
 	protected:
 
@@ -47,7 +52,7 @@ namespace Grafikanwendung {
 		/// <summary>
 		/// Erforderliche Designervariable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -56,6 +61,7 @@ namespace Grafikanwendung {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
 			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(Hauptfenster::typeid));
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->panel_Leinwand = (gcnew System::Windows::Forms::Panel());
@@ -63,7 +69,12 @@ namespace Grafikanwendung {
 			this->button_RechteckZeichnen = (gcnew System::Windows::Forms::Button());
 			this->colorDialog1 = (gcnew System::Windows::Forms::ColorDialog());
 			this->button_FarbeWaehlen = (gcnew System::Windows::Forms::Button());
+			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
+			this->trackBar_Speed = (gcnew System::Windows::Forms::TrackBar());
+			this->label_punktx = (gcnew System::Windows::Forms::Label());
+			this->label_punkty = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->trackBar_Speed))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// pictureBox1
@@ -116,12 +127,48 @@ namespace Grafikanwendung {
 			this->button_FarbeWaehlen->UseVisualStyleBackColor = true;
 			this->button_FarbeWaehlen->Click += gcnew System::EventHandler(this, &Hauptfenster::button_FarbeWaehlen_Click);
 			// 
+			// timer1
+			// 
+			this->timer1->Interval = 2000;
+			this->timer1->Tick += gcnew System::EventHandler(this, &Hauptfenster::timer1_Tick);
+			// 
+			// trackBar_Speed
+			// 
+			this->trackBar_Speed->Location = System::Drawing::Point(596, 469);
+			this->trackBar_Speed->Minimum = 1;
+			this->trackBar_Speed->Name = L"trackBar_Speed";
+			this->trackBar_Speed->Size = System::Drawing::Size(225, 45);
+			this->trackBar_Speed->TabIndex = 5;
+			this->trackBar_Speed->Value = 10;
+			this->trackBar_Speed->Scroll += gcnew System::EventHandler(this, &Hauptfenster::trackBar_Speed_Scroll);
+			// 
+			// label_punktx
+			// 
+			this->label_punktx->AutoSize = true;
+			this->label_punktx->Location = System::Drawing::Point(611, 521);
+			this->label_punktx->Name = L"label_punktx";
+			this->label_punktx->Size = System::Drawing::Size(58, 13);
+			this->label_punktx->TabIndex = 6;
+			this->label_punktx->Text = L"Cursor in X";
+			// 
+			// label_punkty
+			// 
+			this->label_punkty->AutoSize = true;
+			this->label_punkty->Location = System::Drawing::Point(611, 551);
+			this->label_punkty->Name = L"label_punkty";
+			this->label_punkty->Size = System::Drawing::Size(58, 13);
+			this->label_punkty->TabIndex = 7;
+			this->label_punkty->Text = L"Cursor in Y";
+			// 
 			// Hauptfenster
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::LightSkyBlue;
 			this->ClientSize = System::Drawing::Size(865, 671);
+			this->Controls->Add(this->label_punkty);
+			this->Controls->Add(this->label_punktx);
+			this->Controls->Add(this->trackBar_Speed);
 			this->Controls->Add(this->button_FarbeWaehlen);
 			this->Controls->Add(this->button_RechteckZeichnen);
 			this->Controls->Add(this->button_LeinwandLeeren);
@@ -132,7 +179,9 @@ namespace Grafikanwendung {
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Grafikanwendung";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->trackBar_Speed))->EndInit();
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion
@@ -140,5 +189,7 @@ namespace Grafikanwendung {
 	private: System::Void button_LeinwandLeeren_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void button_RechteckZeichnen_Click(System::Object^  sender, System::EventArgs^  e);
 private: System::Void button_FarbeWaehlen_Click(System::Object^  sender, System::EventArgs^  e);
+private: System::Void timer1_Tick(System::Object^  sender, System::EventArgs^  e);
+private: System::Void trackBar_Speed_Scroll(System::Object^  sender, System::EventArgs^  e);
 };
 }
